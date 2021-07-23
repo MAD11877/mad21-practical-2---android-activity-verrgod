@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    User user = new User();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,18 +22,19 @@ public class MainActivity extends AppCompatActivity {
         Log.d("debug","create");
 
         Button followBtn = findViewById(R.id.follow);
-        
+        user.followed = false;
+
         followBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String followString = followBtn.getText().toString();
-                if (followString.equals("Follow")){
+                if (!user.followed){
                     followBtn.setText("Unfollow");
+                    user.followed = true;
                 }
                 else {
                     followBtn.setText(("Follow"));
+                    user.followed = false;
                 }
-
             }
         });
     }
@@ -44,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("debug","resume");
     }
     protected void onRestart(){
-        super.onStart();
+        super.onRestart();
         Log.d("debug","restart");
     }
 }
